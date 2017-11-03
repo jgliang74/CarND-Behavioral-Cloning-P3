@@ -12,9 +12,9 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./writeup_images/model.png "Model Visualization"
-[image2]: ./examples/placeholder_small.png "Center lane driving"
-[image3]: ./examples/placeholder_small.png "Normal Image"
-[image4]: ./examples/placeholder_small.png "Flipped Image"
+[image2]: ./writeup_images/center_lane_driving.jpg "Center lane driving"
+[image3]: ./writeup_images/normal_image.jpg "Normal Image"
+[image4]: ./writeup_images/flipped_image.jpg "Flipped Image"
 
 #### Rubric Points
 Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
