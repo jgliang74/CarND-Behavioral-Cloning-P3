@@ -16,10 +16,6 @@ The goals / steps of this project are the following:
 [image3]: ./writeup_images/normal_image.jpg "Normal Image"
 [image4]: ./writeup_images/flipped_image.jpg "Flipped Image"
 
-#### Rubric Points
-Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
-___
----
 #### Files Submitted & Code Quality
 
 ##### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
@@ -29,7 +25,7 @@ My project includes the following files:
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
 * writeup_project3.md
-* video.mp4 A video recording of the vehicle driving autonomously
+* video.mp4 a video recording of the vehicle driving autonomously
 
 ##### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
@@ -93,9 +89,9 @@ To capture good driving behavior, I first recorded one lap on track one using ce
 
 ![example image of center lane driving][image2]
 
-I the tried to record the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to how to recover from the off lane center postion during autonuous mode. With the recovery data, the car drove better in the autonuous mode, however, it still failed in certain turns ocassionally. This leads me to consider using left camera and right camera as weel. Later I found this is most efficient way to generate enough training data. With all images captured by three cameras, I can only record one lap center land driving data to make car nicely performing autonuous mode driving.
+I then tried to record the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to how to recover from the off lane center postion during autonuous mode. With the recovery data, the car drove better in the autonuous mode, however, it still failed in certain turns ocassionally. This leads me to consider using left camera and right camera as weel. Later I found this is most efficient way to generate enough training data. With all images captured by three cameras, I can only record one lap center land driving data to make car nicely performing autonuous mode driving.
 
-To augment the data sat, I also flipped images and angles thinking that this would provide balanced training data for left turns and right turns. For example, here is an image that has then been flipped:
+To augment the data set, I also flipped images and angles thinking that this would provide balanced training data for left turns and right turns. For example, here is an image that has then been flipped:
 
 ![Normal Image][image3]
 ![Flipped Image][image4]
