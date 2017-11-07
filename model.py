@@ -1,4 +1,4 @@
-import os
+mport os
 import csv
 
 samples = []
@@ -57,12 +57,14 @@ validation_generator = generator(validation_samples, batch_size=6)
 ch, row, col = 3, 160, 320  # Trimmed image format
 
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda
+from keras.layers import Flatten, Dense, Lambda, Dropout
 from keras.layers import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 from keras.layers import Cropping2D
 from keras.models import Model
 import matplotlib.pyplot as plt
+from keras.callbacks import EarlyStopping
+from keras.callbacks import ModelCheckpoint
 
 model = Sequential()
 # Preprocess incoming data, centered around zero with small standard deviation 
@@ -76,15 +78,19 @@ model.add(Convolution2D(48, 5, 5, subsample=(2,2),activation="relu"))
 model.add(Convolution2D(64, 3, 3, activation="relu"))
 model.add(Convolution2D(64, 3, 3, activation="relu"))
 model.add(Flatten())
+model.add(Dropout(0.5))
 model.add(Dense(100))
+model.add(Dropout(0.5))
 model.add(Dense(50))
 model.add(Dense(10))
 model.add(Dense(1))
 
+callbacks = [
+    EarlyStopping(monitor='val_loss', patience=2, verbose=0),
+    ModelCheckpoint(filepath='model_resubmit.h5', monitor='val_loss', save_best_only=True, verbose=0),
+]
 
 model.compile(loss='mse', optimizer='adam')
 history = model.fit_generator(train_generator, samples_per_epoch=len(train_samples*6), 
                               validation_data=validation_generator, nb_val_samples=len(validation_samples), 
-                              nb_epoch=3, verbose=1)
-
-model.save('model.h5')
+                              nb_epoch=20, verbose=1, callbacks = callbacks)
