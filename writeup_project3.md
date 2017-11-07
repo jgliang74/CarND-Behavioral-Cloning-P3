@@ -26,6 +26,9 @@ My project includes the following files:
 * model.h5 containing a trained convolution neural network 
 * writeup_project3.md
 * video.mp4 a video recording of the vehicle driving autonomously
+* bclone_model.html saved version of bclone_model.ipynb used to do model training for resubmission
+* model_resubmit.h5 containing a trained neural nework with dropout and early stop
+* video_resubmit.mp4 a video recording of the vehicle driving autonomouly with resubmitted model
 
 ##### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
@@ -102,6 +105,5 @@ To speed up the training, the images were also cropped down to smaller sizes whi
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by the validation loss started increasing after setting number of epochs more than 3. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. Early stop and Model check feature have been implemented during model training. The total number of epoch was set to10, however the training will be terminated if no progress in reducing val_loss for more than two consecutive steps (patience = 2). The model with least val_loss will be saved during training by setting save_best_only=True in ModelCheckpoint callback. Refer to bclone_model.html for the details on training progress.
 
-It is worth to mention that the dropout didn't offer any help using my final model structure with my final training data set(1 lap center lane driving with 3 camera's images). The autonuous driving performance were equal or worse than the one without dropout(submitted model). My guess is taht dropout would be much helpful if the training data set were relative large.
