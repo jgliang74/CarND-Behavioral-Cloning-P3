@@ -12,10 +12,14 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./writeup_images/model.png "Model Visualization"
-[image2]: ./writeup_images/center_lane_driving.jpg "Center lane driving"
-[image3]: ./writeup_images/normal_image.jpg "Normal Image"
-[image4]: ./writeup_images/flipped_image.jpg "Flipped Image"
+[image2]: ./examples/placeholder_small.png "Center lane driving"
+[image3]: ./examples/placeholder_small.png "Normal Image"
+[image4]: ./examples/placeholder_small.png "Flipped Image"
 
+#### Rubric Points
+Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
+___
+---
 #### Files Submitted & Code Quality
 
 ##### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
@@ -25,7 +29,6 @@ My project includes the following files:
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
 * writeup_project3.md
-* video.mp4 a video recording of the vehicle driving autonomously
 
 ##### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
@@ -89,9 +92,9 @@ To capture good driving behavior, I first recorded one lap on track one using ce
 
 ![example image of center lane driving][image2]
 
-I then tried to record the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to how to recover from the off lane center postion during autonuous mode. With the recovery data, the car drove better in the autonuous mode, however, it still failed in certain turns ocassionally. This leads me to consider using left camera and right camera as weel. Later I found this is most efficient way to generate enough training data. With all images captured by three cameras, I can only record one lap center land driving data to make car nicely performing autonuous mode driving.
+I the tried to record the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to how to recover from the off lane center postion during autonuous mode. With the recovery data, the car drove better in the autonuous mode, however, it still failed in certain turns ocassionally. This leads me to consider using left camera and right camera as weel. Later I found this is most efficient way to generate enough training data. With all images captured by three cameras, I can only record one lap center land driving data to make car nicely performing autonuous mode driving.
 
-To augment the data set, I also flipped images and angles thinking that this would provide balanced training data for left turns and right turns. For example, here is an image that has then been flipped:
+To augment the data sat, I also flipped images and angles thinking that this would provide balanced training data for left turns and right turns. For example, here is an image that has then been flipped:
 
 ![Normal Image][image3]
 ![Flipped Image][image4]
@@ -102,4 +105,8 @@ To speed up the training, the images were also cropped down to smaller sizes whi
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by the validation loss started increasing after setting number of epochs more than 3. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by the validation loss started increasing after setting number of epochs more than 3. I used an adam optimizer so that manually training the learning rate wasn't necessary. 
+
+It is worth to mention that dropout didn't offer much help with my final model structure (Nvidia selfdrive model) and my final training data (1 rev center lan driving with 3 camera's images). The performance were equal or worse than the one without dropout (submitted model.h5). My guess is that dropout will be only helpful if the training data set are relative large.
+
+
